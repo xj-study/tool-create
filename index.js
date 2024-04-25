@@ -4,14 +4,15 @@ import { getConf } from './repolist.js'
 
 const repolist = getConf()
 const choices = repolist.map((item, index) => {
-  const { title } = item
-  return { title, value: index }
+  item.value = index
+  return item
 })
 const promptsOptions = [
   {
     type: 'text',
     name: 'name',
     message: '请输入项目名称',
+    initial: 'project',
   },
   {
     type: 'select', //单选
@@ -19,17 +20,19 @@ const promptsOptions = [
     message: '请选择项目模板',
     choices,
   },
+  {
+    type: 'text', //单选
+    name: 'branch',
+    message: '请输入项目模板分支',
+    initial: 'main',
+  },
 ]
-
-const reopLKist = getConf()
 
 const getUserInfo = async () => {
   const res = await prompts(promptsOptions)
-  if (!res.template || !res.name) {
-    return
-  }
+  const branch = res.branch || 'main'
   const source = repolist[res.template].url
-  const reop = `direct:${source}`
+  const reop = `direct:${source}#${branch}`
   remoteCode(reop, res.name, { clone: true })
 }
 
