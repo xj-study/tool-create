@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "type": "module",
+  "bin": {
+    "tool-cli": "index.js"
+  },
   "scripts": {
-    "dev":"node index.js"
+    "dev": "node index.js",
+    "test": "tool-create"
   },
   "author": "",
   "license": "ISC",
