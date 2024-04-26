@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import prompts from 'prompts'
 import remoteCode from './remoteCode.js'
 import { getConf } from './repolist.js'
